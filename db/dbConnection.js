@@ -4,10 +4,12 @@ const timestamp = require('mongoose-timestamp');
 
 module.exports.connectToDb = async () => {
     try {
-        await mongoose.connect(config.API.MONGODB_URI)
+        await mongoose.connect(config.API.MONGODB_URI);
         console.log('connected to DB')
+        return true;
     } catch (e) {
-        console.log('Error on DB connection:', e.message)
+        console.log('Error on DB connection:', e.message);
+        return false;
     }
 }
 

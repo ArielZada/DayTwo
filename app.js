@@ -19,8 +19,10 @@ routes.initRoutes(app);
 
 const server = app.listen(API.PORT, async () => {
     console.log(`Listening on port: ${API.PORT}`);
-    await dbConnection.connectToDb();
-    await jobs.runJobs();
+    const connected = await dbConnection.connectToDb();
+    if (connected) {
+        await jobs.runJobs();
+    }
 });
 
 server.on('error', (error) => {
