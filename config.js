@@ -1,6 +1,6 @@
 module.exports.API = {
     PORT: 4000,
-    MONGODB_URI: "mongodb+srv://arielzada:vS9aSSm6wQK4fg8Y@superheros.agbmr7n.mongodb.net/?retryWrites=true&w=majority&appName=superHeros",
+    MONGODB_URI: `mongodb+srv://arielzada:${process.env.MONGODB_PASSWORD}@superheros.agbmr7n.mongodb.net/?retryWrites=true&w=majority&appName=superHeros`,
     DB_FETCH_WAIT_IN_MINUTES: 3,
     BASE_URLS: ['http://localhost:4000/base']
 }
