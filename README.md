@@ -5,6 +5,7 @@ start the project:
 2) type npm install
 3) type npm start
 
+on "textFiles" folder we can find the instructions and postman collection to send requests
 add data to the project:
 
 1) add superHero:
