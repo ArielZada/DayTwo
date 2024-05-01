@@ -4,7 +4,7 @@ const timersUtils = require('../db/timers/timersDbUtils');
 const scheduler = require('../utils/taskSchedueler');
 const request = require('../utils/request');
 const {API} = require('../config');
-const {ServiceError, BadTimeError, BadMessageToBase, BadIDError} = require("./serviceError");
+const {ServiceError, BadInputError, BadMessageToBase, BadIDError} = require("./serviceError");
 
 async function sendMessageToBase(id) {
     console.log(`Job executed! for id ${id}`);
@@ -107,16 +107,23 @@ async function sendMessage(params) {
 }
 
 function validateTimeParams(params) {
-    const {hours, minutes, seconds} = params;
+    const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+[^\s]*$/i);
+    const {hours, minutes, seconds, url} = params;
     if (hours == null || hours < 0 || hours > 23) {
-        throw new BadTimeError(`Hours must be between 0 and 23, sent ${hours}`);
+        throw new BadInputError(`Hours must be between 0 and 23, sent ${hours}`);
     }
     if (minutes == null || minutes < 0 || minutes > 59) {
-        throw new BadTimeError(`Minutes must be between 0 and 59, sent ${minutes}`);
+        throw new BadInputError(`Minutes must be between 0 and 59, sent ${minutes}`);
     }
     if (seconds == null || seconds < 0 || seconds > 59) {
-        throw new BadTimeError(`Seconds must be between 0 and 59, sent ${seconds}`);
+        throw new BadInputError(`Seconds must be between 0 and 59, sent ${seconds}`);
     }
+    if (!API.BASE_URLS.includes(url)){
+        const message = !urlRegex.test(url) ? `url must be a valid url, sent ${url}` :
+            `you provided with the wrong bse url! contact the base for the right one`;
+        throw new BadInputError(message);
+    }
+
 }
 
 module.exports = {

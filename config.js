@@ -1,7 +1,8 @@
 module.exports.API = {
     PORT: 4000,
     MONGODB_URI: "mongodb+srv://arielzada:vS9aSSm6wQK4fg8Y@superheros.agbmr7n.mongodb.net/?retryWrites=true&w=majority&appName=superHeros",
-    DB_FETCH_WAIT_IN_MINUTES: 3
+    DB_FETCH_WAIT_IN_MINUTES: 3,
+    BASE_URLS: ['http://localhost:4000/base']
 }
 
 module.exports.ENDPOINTS = {
@@ -9,6 +10,7 @@ module.exports.ENDPOINTS = {
     TIMERS: 'timers',
     BASE: 'base'
 }
+
 module.exports.statuses = {
     SUCCESS: {
         STATUS_CODE_OK: 200,

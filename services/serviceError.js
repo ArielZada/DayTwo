@@ -21,7 +21,7 @@ class BadIDError extends ServiceError {
     }
 }
 
-class BadTimeError extends ServiceError {
+class BadInputError extends ServiceError {
     constructor(message) {
         super(message);
     }
@@ -39,7 +39,7 @@ function getStatus(e) {
         return statuses.CLIENT_ERROR.STATUS_CODE_BAD_REQUEST;
     } else if (e instanceof DuplicateKeyError) {
         return statuses.CLIENT_ERROR.STATUS_CODE_BAD_REQUEST;
-    } else if (e instanceof BadTimeError) {
+    } else if (e instanceof BadInputError) {
         return statuses.CLIENT_ERROR.STATUS_CODE_BAD_REQUEST;
     } else {
         return statuses.SERVER_ERROR.STATUS_CODE_INTERNAL_SERVER_ERROR;
@@ -50,7 +50,7 @@ module.exports = {
     ServiceError,
     DuplicateKeyError,
     BadIDError,
-    BadTimeError,
+    BadInputError,
     BadMessageToBase,
     getStatus
 };
