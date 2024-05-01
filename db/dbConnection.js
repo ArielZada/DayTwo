@@ -8,7 +8,7 @@ module.exports.connectToDb = async () => {
         console.log('connected to DB')
         return true;
     } catch (e) {
-        console.log('Error on DB connection:', e.message);
+        console.log(`Error on DB connection: ${e.message}. Make sure the password is correct and well set as env variable`);
         return false;
     }
 }
