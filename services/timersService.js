@@ -14,7 +14,8 @@ async function sendMessageToBase(id) {
     }
     const timerObject = timer.toObject();
     try {
-        const baseReqObject = {senderName: timerObject.sender, timerID: id, message: timerObject.message}
+        const hero = await superheroesService.getHero(timerObject.sender);
+        const baseReqObject = {senderName: hero.alias, timerID: id, message: timerObject.message}
         await request.insertData(timerObject.url, baseReqObject);
         await timersModel.updateOne({_id: id}, {$set: {status: timersUtils.timerStatuses.DONE}});
         console.log(`Updated Status success! message ${id} has reached the Base!`);
@@ -106,7 +107,7 @@ async function sendMessage(params) {
 
 }
 
-function validateTimeParams(params) {
+function validateParams(params) {
     const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+[^\s]*$/i);
     const {hours, minutes, seconds, url} = params;
     if (hours == null || hours < 0 || hours > 23) {
@@ -132,5 +133,5 @@ module.exports = {
     getAllPendingTimers,
     getTimer,
     sendMessage,
-    validateTimeParams
+    validateParams
 };

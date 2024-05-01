@@ -1,7 +1,7 @@
 const db = require('../dbConnection');
 const utils = require('./timersDbUtils');
 const provider = db.provider;
-const URL_REGEX = new RegExp(/^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+[^\s]*$/i)
+const URL_REGEX = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]/gi);
 
 const timersSchema = provider.Schema({
     sender: {
