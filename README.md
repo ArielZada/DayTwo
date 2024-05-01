@@ -5,7 +5,8 @@ start the project:
 2) type npm install
 3) type npm start
 
-on "textFiles" folder we can find the instructions and postman collection to send requests
+on "textFiles" folder we can find the instructions and postman collection to send requests.
+password to mongodb should be added to process.env.MONGODB_PASSWORD
 add data to the project:
 
 1) add superHero:
