@@ -14,7 +14,12 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+app.use((req, res, next) => {
+    //to check when the message has been received
+    req.createdAt = new Date();
+    console.log(`Request received at: ${req.createdAt}`);
+    next();
+});
 routes.initRoutes(app);
 
 const server = app.listen(API.PORT, async () => {
