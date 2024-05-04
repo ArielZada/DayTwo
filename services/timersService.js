@@ -86,7 +86,7 @@ async function sendMessage(params) {
     try {
         const sender = params.sender;
         const hero = await superheroesService.getHero(sender);
-        const now = new Date();
+        const now = params.createdAt;
         const executionTime = new Date(now.getTime() + (hours * 3600 + minutes * 60 + seconds) * 1000);
         const timerParams = {
             sender: params.sender,
