@@ -109,7 +109,11 @@ async function sendMessage(params) {
 
 function validateParams(params) {
     const urlRegex = new RegExp(/^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+[^\s]*$/i);
-    const {hours, minutes, seconds, url} = params;
+    const {hours, minutes, seconds, url, createdAt} = params;
+    if (createdAt == null) {
+        console.error(`error while checking createdAt, make sure req.createdAt exists`);
+        throw new ServiceError(`Server could not accept the request`);
+    }
     if (hours == null || hours < 0 || hours > 23) {
         throw new BadInputError(`Hours must be between 0 and 23, sent ${hours}`);
     }
