@@ -29,7 +29,8 @@ router.get(`/${ENDPOINTS.TIMERS}/:id`, async (req, res,next) => {
 router.post(`/${ENDPOINTS.TIMERS}`, async (req, res,next) => {
     try {
         const params = req.body;
-        timerService.validateParams(params)
+        params.createdAt = req.createdAt;
+        timerService.validateParams(params);
         const timer = await timerService.sendMessage(params);
         res.send(timer);
     } catch (e) {
